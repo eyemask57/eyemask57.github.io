@@ -1,0 +1,14 @@
+# Hugo build output
+/public/
+/resources/_gen/
+.hugo_build.lock
+
+# OS / editor
+.DS_Store
+Thumbs.db
+
+# Claude Code のローカル設定
+.claude/
+
+# Node (テーマのビルドを行う場合)
+node_modules/

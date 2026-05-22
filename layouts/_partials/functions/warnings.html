@@ -1,0 +1,17 @@
+{{- /*
+  Congo テーマの functions/warnings.html を上書きしたもの。
+  オリジナルは `{{ if .Author }}`（= site.Author）を参照しているが、
+  新しい Hugo では site.Author が削除されており
+  「can't evaluate field Author in type *page.siteWrapper」エラーで
+  ビルドが停止する。著者情報は params.author に移行済みのため、
+  該当チェックを取り除いている。
+*/ -}}
+{{ if ne .Params.showAppearanceSwitcher nil }}
+  {{ warnf "[CONGO] Theme parameter `showAppearanceSwitcher` has been renamed to `footer.showAppearanceSwitcher`. Please update your site configuration." }}
+{{ end }}
+{{ if ne .Params.showScrollToTop nil }}
+  {{ warnf "[CONGO] Theme parameter `showScrollToTop` has been renamed to `footer.showScrollToTop`. Please update your site configuration." }}
+{{ end }}
+{{ if ne .Params.logo nil }}
+  {{ warnf "[CONGO] Theme parameter `logo` has been renamed to `header.logo`. Please update your site configuration." }}
+{{ end }}
