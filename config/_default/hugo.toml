@@ -1,7 +1,7 @@
 # -- Site Configuration --
 # https://jpanther.github.io/congo/docs/getting-started/
 
-baseURL = "https://eyemask57.github.io/"
+baseURL = "https://matenlumo.com/"
 theme = "congo"
 
 defaultContentLanguage = "ja"
