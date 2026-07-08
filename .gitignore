@@ -1,7 +1,10 @@
-# Hugo build output
-/public/
-/resources/_gen/
-.hugo_build.lock
+# Astro build output
+/dist/
+/.astro/
+
+# Node
+node_modules/
+npm-debug.log*
 
 # OS / editor
 .DS_Store
@@ -9,6 +12,3 @@ Thumbs.db
 
 # Claude Code のローカル設定
 .claude/
-
-# Node (テーマのビルドを行う場合)
-node_modules/

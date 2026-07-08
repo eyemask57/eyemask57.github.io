@@ -1,0 +1,33 @@
+---
+interface Props {
+  slug: string;
+  name: string;
+  tagline: string;
+  status: "released" | "beta" | "development";
+}
+
+const { slug, name, tagline, status } = Astro.props;
+
+const statusLabel = {
+  released: "公開中",
+  beta: "ベータ版",
+  development: "開発中",
+}[status];
+---
+
+<a
+  href={`/products/${slug}/`}
+  class="group block rounded-xl border border-neutral-200 bg-white p-6 shadow-sm transition hover:border-dawn-300 hover:shadow-md"
+>
+  <div class="mb-3 flex items-center justify-between">
+    <h3 class="text-lg font-bold text-neutral-900 transition-colors group-hover:text-dawn-600">
+      {name}
+    </h3>
+    <span
+      class="rounded-full bg-dawn-50 px-3 py-1 text-xs font-medium text-dawn-700"
+    >
+      {statusLabel}
+    </span>
+  </div>
+  <p class="text-sm leading-relaxed text-neutral-600">{tagline}</p>
+</a>

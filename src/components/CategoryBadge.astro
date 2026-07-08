@@ -1,0 +1,21 @@
+---
+interface Props {
+  category: "press" | "update";
+}
+
+const { category } = Astro.props;
+
+const config = {
+  press: { label: "プレスリリース", class: "bg-dawn-50 text-dawn-700" },
+  update: { label: "更新情報", class: "bg-neutral-100 text-neutral-600" },
+}[category];
+---
+
+<span
+  class:list={[
+    "inline-block rounded-full px-3 py-1 text-xs font-medium",
+    config.class,
+  ]}
+>
+  {config.label}
+</span>

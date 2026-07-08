@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+  /* 夜明けの光 — 暖色アクセント（1色のみ） */
+  --color-dawn-50: #fff8f1;
+  --color-dawn-100: #feecdc;
+  --color-dawn-200: #fcd9bd;
+  --color-dawn-300: #fdba8c;
+  --color-dawn-400: #ff8a4c;
+  --color-dawn-500: #f4731c;
+  --color-dawn-600: #d95d0e;
+  --color-dawn-700: #b4460a;
+  --color-dawn-800: #8a370f;
+  --color-dawn-900: #712f10;
+
+  --font-sans: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic UI",
+    "Noto Sans JP", Meiryo, system-ui, sans-serif;
+}
+
+html {
+  @apply scroll-smooth;
+}
+
+body {
+  @apply bg-white text-neutral-800 antialiased;
+}

@@ -1,0 +1,46 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import CategoryBadge from "../../components/CategoryBadge.astro";
+
+const news = (await getCollection("news")).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString("ja-JP", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+---
+
+<Base title="News" description="Matenlumoからのお知らせ・プレスリリース・更新情報．">
+  <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6">
+    <h1 class="text-3xl font-bold text-neutral-900">News</h1>
+    <p class="mt-4 text-neutral-600">
+      Matenlumoからのお知らせ・プレスリリース・更新情報です．
+    </p>
+    <ul class="mt-10 divide-y divide-neutral-200 border-y border-neutral-200">
+      {
+        news.map((item) => (
+          <li>
+            <a
+              href={`/news/${item.id}/`}
+              class="flex flex-col gap-2 py-4 transition-colors hover:bg-neutral-50 sm:flex-row sm:items-center sm:gap-4"
+            >
+              <time
+                datetime={item.data.date.toISOString().slice(0, 10)}
+                class="shrink-0 text-sm text-neutral-500"
+              >
+                {formatDate(item.data.date)}
+              </time>
+              <CategoryBadge category={item.data.category} />
+              <span class="font-medium text-neutral-800">{item.data.title}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Base>

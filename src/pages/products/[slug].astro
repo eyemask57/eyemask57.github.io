@@ -1,0 +1,117 @@
+---
+import { getCollection, render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+
+export async function getStaticPaths() {
+  const products = await getCollection("products");
+  return products.map((product) => ({
+    params: { slug: product.id },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props;
+const { Content } = await render(product);
+
+const statusLabel = {
+  released: "公開中",
+  beta: "ベータ版",
+  development: "開発中",
+}[product.data.status];
+---
+
+<Base title={product.data.name} description={product.data.description}>
+  <article class="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+    <div class="flex items-center gap-4">
+      <h1 class="text-3xl font-bold text-neutral-900">{product.data.name}</h1>
+      <span
+        class="rounded-full bg-dawn-50 px-3 py-1 text-xs font-medium text-dawn-700"
+      >
+        {statusLabel}
+      </span>
+    </div>
+    <p class="mt-4 text-lg text-neutral-600">{product.data.tagline}</p>
+
+    <div class="mt-8 flex flex-wrap gap-3">
+      {
+        product.data.links.site && (
+          <a
+            href={product.data.links.site}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded-lg bg-dawn-600 px-6 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-dawn-700"
+          >
+            {product.data.name} を使ってみる →
+          </a>
+        )
+      }
+      {
+        product.data.links.download && (
+          <a
+            href={product.data.links.download}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded-lg bg-dawn-600 px-6 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-dawn-700"
+          >
+            ダウンロード
+          </a>
+        )
+      }
+      {
+        product.data.links.github && (
+          <a
+            href={product.data.links.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded-lg border border-neutral-300 px-6 py-3 text-sm font-bold text-neutral-700 transition hover:border-dawn-400 hover:text-dawn-600"
+          >
+            GitHub
+          </a>
+        )
+      }
+    </div>
+
+    <div
+      class="prose-custom mt-12 border-t border-neutral-200 pt-10 leading-relaxed text-neutral-700"
+    >
+      <Content />
+    </div>
+
+    <p class="mt-12">
+      <a href="/products/" class="text-sm font-medium text-dawn-600 hover:underline">
+        ← プロダクト一覧に戻る
+      </a>
+    </p>
+  </article>
+</Base>
+
+<style is:global>
+  .prose-custom h2 {
+    margin: 2rem 0 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-neutral-900);
+  }
+  .prose-custom p {
+    margin: 1rem 0;
+  }
+  .prose-custom ul {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+    list-style: disc;
+  }
+  .prose-custom ul li + li {
+    margin-top: 0.5rem;
+  }
+  .prose-custom a {
+    color: var(--color-dawn-600);
+    text-decoration: underline;
+  }
+  .prose-custom a:hover {
+    color: var(--color-dawn-700);
+  }
+  .prose-custom strong {
+    font-weight: 700;
+    color: var(--color-neutral-900);
+  }
+</style>

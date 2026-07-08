@@ -1,0 +1,93 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import ProductCard from "../components/ProductCard.astro";
+import CategoryBadge from "../components/CategoryBadge.astro";
+
+const products = (await getCollection("products")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const news = (await getCollection("news"))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString("ja-JP", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+---
+
+<Base>
+  <!-- ヒーロー -->
+  <section
+    class="bg-gradient-to-b from-dawn-50 to-white px-4 py-20 text-center sm:py-28"
+  >
+    <div class="mx-auto max-w-3xl">
+      <h1 class="text-4xl font-bold tracking-tight text-neutral-900 sm:text-5xl">
+        Maten<span class="text-dawn-600">lumo</span>
+      </h1>
+      <p class="mt-6 text-lg leading-relaxed text-neutral-600">
+        夜明けの光のように，日々の暮らしをすこし明るく．<br />
+        Matenlumoは，シンプルで使いやすいソフトウェアをつくる個人開発ブランドです．
+      </p>
+    </div>
+  </section>
+
+  <!-- プロダクト -->
+  <section class="mx-auto max-w-5xl px-4 py-16 sm:px-6">
+    <div class="mb-8 flex items-end justify-between">
+      <h2 class="text-2xl font-bold text-neutral-900">Products</h2>
+      <a
+        href="/products/"
+        class="text-sm font-medium text-dawn-600 hover:underline"
+      >
+        すべて見る →
+      </a>
+    </div>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        products.map((product) => (
+          <ProductCard
+            slug={product.id}
+            name={product.data.name}
+            tagline={product.data.tagline}
+            status={product.data.status}
+          />
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- ニュース -->
+  <section class="mx-auto max-w-5xl px-4 py-16 sm:px-6">
+    <div class="mb-8 flex items-end justify-between">
+      <h2 class="text-2xl font-bold text-neutral-900">News</h2>
+      <a href="/news/" class="text-sm font-medium text-dawn-600 hover:underline">
+        一覧へ →
+      </a>
+    </div>
+    <ul class="divide-y divide-neutral-200 border-y border-neutral-200">
+      {
+        news.map((item) => (
+          <li>
+            <a
+              href={`/news/${item.id}/`}
+              class="flex flex-col gap-2 py-4 transition-colors hover:bg-neutral-50 sm:flex-row sm:items-center sm:gap-4"
+            >
+              <time
+                datetime={item.data.date.toISOString().slice(0, 10)}
+                class="shrink-0 text-sm text-neutral-500"
+              >
+                {formatDate(item.data.date)}
+              </time>
+              <CategoryBadge category={item.data.category} />
+              <span class="font-medium text-neutral-800">{item.data.title}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>
