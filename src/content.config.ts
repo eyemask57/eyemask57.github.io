@@ -25,6 +25,7 @@ const news = defineCollection({
     title: z.string(),
     date: z.coerce.date(),
     category: z.enum(["press", "update"]),
+    description: z.string().optional(),
   }),
 });
 
