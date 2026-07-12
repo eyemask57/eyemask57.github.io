@@ -13,6 +13,10 @@ export const NAV_ITEMS = [
  */
 export const SOCIAL_LINKS: { label: string; url: string }[] = [
   { label: "GitHub", url: "https://github.com/eyemask57" },
+  { label: "Ko-fi", url: "https://ko-fi.com/matenlumo" },
   { label: "X (Twitter)", url: "" },
   { label: "YouTube", url: "" },
 ];
+
+/** Ko-fi 支援ページのURL（About・プロダクトページのCTAで使用） */
+export const KOFI_URL = "https://ko-fi.com/matenlumo";
