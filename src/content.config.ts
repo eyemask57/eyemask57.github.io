@@ -14,6 +14,8 @@ const products = defineCollection({
         site: z.string().url().optional(),
         github: z.string().url().optional(),
         download: z.string().url().optional(),
+        /** サイト内ヘルプへの相対パス（例: /help/tango-note/） */
+        help: z.string().optional(),
       })
       .default({}),
   }),
@@ -29,4 +31,13 @@ const news = defineCollection({
   }),
 });
 
-export const collections = { products, news };
+const help = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/help" }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    order: z.number(),
+  }),
+});
+
+export const collections = { products, news, help };

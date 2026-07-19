@@ -62,6 +62,16 @@ const statusLabel = {
         )
       }
       {
+        product.data.links.help && (
+          <a
+            href={product.data.links.help}
+            class="rounded-lg border border-neutral-300 px-6 py-3 text-sm font-bold text-neutral-700 transition hover:border-dawn-400 hover:text-dawn-600"
+          >
+            ヘルプを見る →
+          </a>
+        )
+      }
+      {
         product.data.links.github && (
           <a
             href={product.data.links.github}

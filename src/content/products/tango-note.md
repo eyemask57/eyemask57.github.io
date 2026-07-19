@@ -7,6 +7,7 @@ status: released
 links:
   github: https://github.com/eyemask57/tango-note
   download: https://github.com/eyemask57/tango-note/releases
+  help: /help/tango-note/
 ---
 
 ## Tango Noteとは
