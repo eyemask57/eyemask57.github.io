@@ -29,4 +29,8 @@ Tango Note は、Windows で動く「覚えるための道具」です。
 - ChatGPT などの AI に問題を作らせて、まとめて取り込みたい（CSV 対応）
 - 学習データをクラウドに預けたくない
 
-<!-- TODO: ダウンロード導線（インストーラーの実URL確定後にボタン設置） -->
+## ダウンロード
+
+Tango Note は [GitHub のリリースページ](https://github.com/eyemask57/tango-note/releases) から無料でダウンロードできます。インストーラーは `tango-note-setup.exe` です。
+
+はじめて使うときは、[クイックスタート — 最初の10分](/help/tango-note/quickstart/) を見ながら進めてください。

@@ -193,4 +193,35 @@ const hrefOf = (id: string) =>
     margin: 2.5rem 0;
     border-color: var(--color-neutral-200);
   }
+  /* 表は自身の中で横スクロールさせる（ページ本体は横スクロールさせない）。
+     ラッパー要素を挟まずに済むよう table 自体をブロック化してスクロールさせる。 */
+  .help-prose table {
+    display: block;
+    margin: 1.5rem 0;
+    max-width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+  .help-prose th,
+  .help-prose td {
+    border: 1px solid var(--color-neutral-200);
+    padding: 0.625rem 0.875rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  .help-prose th {
+    background: var(--color-neutral-50);
+    font-weight: 700;
+    color: var(--color-neutral-900);
+    white-space: nowrap;
+  }
+  .help-prose td {
+    color: var(--color-neutral-700);
+  }
+  .help-prose td code,
+  .help-prose th code {
+    white-space: nowrap;
+  }
 </style>
