@@ -7,6 +7,7 @@ status: released
 links:
   github: https://github.com/eyemask57/tango-note
   download: https://github.com/eyemask57/tango-note/releases
+  help: /help/tango-note/
 ---
 
 ## Tango Noteとは
@@ -19,4 +20,4 @@ Tango Note（タンゴノート）は、語彙学習に特化したフラッシ�
 - **フラッシュカード学習** — シンプルな反復学習で記憶に定着
 - **デスクトップアプリ** — Python製。Windowsにインストールして利用できます
 
-※ ダウンロードリンクは準備中です。正式版の公開までしばらくお待ちください。
+使い方は [ヘルプ](/help/tango-note/) で詳しく説明しています。
