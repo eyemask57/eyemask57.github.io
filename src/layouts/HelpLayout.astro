@@ -1,18 +1,27 @@
 ---
 import { getCollection } from "astro:content";
+import type { MarkdownHeading } from "astro";
 import Base from "./Base.astro";
 
 interface Props {
   title: string;
   description?: string;
   currentId: string;
+  headings?: MarkdownHeading[];
 }
 
-const { title, description, currentId } = Astro.props;
+const { title, description, currentId, headings = [] } = Astro.props;
 
 const pages = (await getCollection("help")).sort(
   (a, b) => a.data.order - b.data.order,
 );
+
+/**
+ * 見出しが多いページ向けのページ内目次。h2（Astro が付与する安定 slug を id に持つ）
+ * のみを対象にし、5 本以上あるページでのみ表示する。
+ */
+const tocItems = headings.filter((h) => h.depth === 2);
+const showToc = tocItems.length >= 5;
 
 /** index.md は /help/tango-note/ に、それ以外はスラッグページに対応させる */
 const hrefOf = (id: string) =>
@@ -104,6 +113,30 @@ const hrefOf = (id: string) =>
             </p>
           )
         }
+        {
+          showToc && (
+            <nav
+              aria-label="このページの目次"
+              class="mt-8 rounded-lg border border-neutral-200 bg-neutral-50 p-5"
+            >
+              <p class="text-xs font-bold tracking-wider text-neutral-500 uppercase">
+                このページの内容
+              </p>
+              <ul class="mt-3 space-y-2">
+                {tocItems.map((h) => (
+                  <li>
+                    <a
+                      href={`#${h.slug}`}
+                      class="text-sm text-neutral-600 underline-offset-2 transition-colors hover:text-dawn-600 hover:underline"
+                    >
+                      {h.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )
+        }
         <div class="mt-8 border-t border-neutral-200 pt-8">
           <slot />
         </div>
@@ -118,6 +151,7 @@ const hrefOf = (id: string) =>
     font-size: 1.375rem;
     font-weight: 700;
     color: var(--color-neutral-900);
+    scroll-margin-top: 1.5rem;
   }
   .help-prose h3 {
     margin: 2rem 0 0.75rem;
